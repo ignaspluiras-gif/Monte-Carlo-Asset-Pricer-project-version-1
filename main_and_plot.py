@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
-from data_manager import get_stock_data, get_stats
-from monte_carlo import simulate_gbm, calculate_var
+from data_import import get_stock_data, get_stats
+from math_part_for_GBM import simulate_gbm, calculate_var
 
 # --- SETTINGS ---
 TICKER = 'AAPL'       
