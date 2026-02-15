@@ -13,14 +13,16 @@ def simulate_gbm(last_price, mu, sigma, n_sims, time_horizon):
     
     Z = np.random.normal(0, 1, (time_horizon, n_sims))
 
+
     
-    # here we define correction factor for the stocks volatality
-    # drift is like a better version of mu that says where u land at the end of cycle in terms of procentage compared to your start
-    drift = (mu - 0.5 * sigma**2)
+    # here we define correction factor for the stocks volatality, called volatality drag
+    # real_growth is like a better version of mu that says where u land at the end of cycle in terms of procentage compared to your start
+    # volatility_drag= -0.5 * sigma**2
+    expected_CAGR = (mu - 0.5 * sigma**2)
     
     # converting daily returns to exponential form to get proportional growth returns 
     # daily returns are now defined as exponential of drift + schock to the normal Distribution
-    daily_returns = np.exp(drift + sigma * Z)
+    daily_returns = np.exp(expected_CAGR + sigma * Z)
     
     # basically just a matrix of same shape as Z with 0 in every part
     price_paths = np.zeros_like(daily_returns)
